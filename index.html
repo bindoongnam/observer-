@@ -240,16 +240,46 @@
     let currentPlatform = 'all';
     let searchQuery = '';
 
-    // Visit Analytics Track (로컬 + 깃허브 클라우드 실시간 집계)
-    try {
-      fetch('/api/analytics/visit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ source: 'insta' })
-      }).catch(() => {});
-      // 🌐 인터넷 깃허브 실시간 방문자 카운트
-      fetch('https://countapi.mileshilliard.com/api/v1/hit/observer_shop_total_visits').catch(() => {});
-    } catch(e){}
+    // 👤 관리자(빈둥남) 감지 로직: 내 접속은 방문자/클릭 수에서 100% 완전 제외!
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === '1' || urlParams.get('admin') === 'true' || window.location.hash === '#admin') {
+      localStorage.setItem('shop_admin_mode', 'true');
+      alert('👤 [빈둥남 관리자 모드 등록 완료]\n이 스마트폰/브라우저에서의 접속은 앞으로 방문자 카운트에서 100% 제외됩니다!');
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const isAdmin = isLocal || localStorage.getItem('shop_admin_mode') === 'true';
+
+    // 관리자 모드 배지 표시
+    if (isAdmin) {
+      window.addEventListener('DOMContentLoaded', () => {
+        const adminBadge = document.createElement('div');
+        adminBadge.style.cssText = 'position:fixed; bottom:14px; right:14px; z-index:99999; background:rgba(15,23,42,0.92); border:1.5px solid #a855f7; color:#e9d5ff; font-size:11px; font-weight:800; padding:6px 14px; border-radius:20px; box-shadow:0 4px 16px rgba(0,0,0,0.6); display:flex; align-items:center; gap:6px; cursor:pointer;';
+        adminBadge.innerHTML = '<span>🛡️</span> 관리자 모드 (방문수 미집계)';
+        adminBadge.title = '클릭 시 일반 모드로 전환 가능';
+        adminBadge.onclick = () => {
+          if (confirm('관리자 모드를 끄고 일반 방문자 모드로 전환할까요?')) {
+            localStorage.removeItem('shop_admin_mode');
+            location.reload();
+          }
+        };
+        document.body.appendChild(adminBadge);
+      });
+    }
+
+    // Visit Analytics Track (일반 방문자만 집계! 관리자 접속은 절대 카운트 안 함!)
+    if (!isAdmin) {
+      try {
+        fetch('/api/analytics/visit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'insta' })
+        }).catch(() => {});
+        // 🌐 인터넷 깃허브 실시간 방문자 카운트
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/observer_shop_total_visits').catch(() => {});
+      } catch(e){}
+    }
 
     // Load Products
     async function loadProducts() {
@@ -364,6 +394,7 @@
     }
 
     function trackClick(productId) {
+      if (isAdmin) return; // 👤 관리자 클릭은 카운트에서 100% 제외!
       try {
         fetch('/api/analytics/click', {
           method: 'POST',
