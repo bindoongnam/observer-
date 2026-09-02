@@ -240,13 +240,15 @@
     let currentPlatform = 'all';
     let searchQuery = '';
 
-    // Visit Analytics Track
+    // Visit Analytics Track (로컬 + 깃허브 클라우드 실시간 집계)
     try {
       fetch('/api/analytics/visit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ source: 'insta' })
-      });
+      }).catch(() => {});
+      // 🌐 인터넷 깃허브 실시간 방문자 카운트
+      fetch('https://countapi.mileshilliard.com/api/v1/hit/observer_shop_total_visits').catch(() => {});
     } catch(e){}
 
     // Load Products
@@ -349,7 +351,13 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ productId })
-        });
+        }).catch(() => {});
+
+        // 🌐 인터넷 깃허브 실시간 상품 클릭 카운트
+        fetch('https://countapi.mileshilliard.com/api/v1/hit/observer_shop_total_clicks').catch(() => {});
+        if (productId) {
+          fetch(`https://countapi.mileshilliard.com/api/v1/hit/observer_shop_prod_${productId}`).catch(() => {});
+        }
       } catch (e) {}
     }
 
