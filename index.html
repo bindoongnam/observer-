@@ -68,25 +68,27 @@
       font-size: 13px; color: #0f172a;
     }
 
-    /* Platform Tabs (2줄 자동 줄바꿈) */
+    /* Platform Tabs (5개 한 줄 완벽 맞춤) */
     .platform-bar {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 6px 16px 8px;
+      display: flex; flex-wrap: nowrap; justify-content: center; gap: 4px; padding: 6px 8px 6px;
       max-width: 600px; margin: 0 auto;
     }
     .plat-btn {
-      padding: 5px 11px; border-radius: 16px; font-size: 11.5px; font-weight: 700;
+      flex: 1; max-width: 72px; padding: 6px 3px; border-radius: 14px; font-size: 11px; font-weight: 700;
       background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
+      text-align: center;
     }
     .plat-btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
 
-    /* Category Bar (옆 스크롤 없이 2줄로 완벽 배치) */
+    /* Category Bar (4개씩 딱 2줄 바둑판) */
     .cat-bar {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 4px 16px 10px;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; padding: 4px 10px 10px;
       max-width: 600px; margin: 0 auto;
     }
     .cat-btn {
-      padding: 6px 13px; border-radius: 8px; font-size: 12px; font-weight: 700;
-      background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
+      padding: 7px 2px; border-radius: 8px; font-size: 11px; font-weight: 700;
+      background: #f8fafc; color: #475569; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
+      text-align: center;
     }
     .cat-btn.active { color: #fff; font-weight: 900; background: #f59e0b; border-color: #f59e0b; }
 
@@ -196,22 +198,25 @@
       </div>
     </div>
 
-    <!-- 1단계: 플랫폼별 탭 -->
+    <!-- 1단계: 플랫폼별 탭 (5개 1줄) -->
     <div class="platform-bar" id="platformBar">
-      <button class="plat-btn active" data-plat="all">🌐 전체 플랫폼</button>
+      <button class="plat-btn active" data-plat="all">🌐 전체</button>
       <button class="plat-btn" data-plat="coupang">🚀 쿠팡</button>
       <button class="plat-btn" data-plat="naver">🟢 네이버</button>
       <button class="plat-btn" data-plat="aliexpress">🟠 알리</button>
       <button class="plat-btn" data-plat="toss">💙 토스</button>
     </div>
 
-    <!-- 2단계: 카테고리 탭 -->
+    <!-- 2단계: 카테고리 탭 (4개씩 딱 2줄 바둑판) -->
     <div class="cat-bar" id="catBar">
-      <button class="cat-btn active" data-cat="all">전체보기</button>
+      <button class="cat-btn active" data-cat="all">🔥 전체보기</button>
       <button class="cat-btn" data-cat="kitchen">🍳 욕실/주방</button>
       <button class="cat-btn" data-cat="clean">🧹 청소/정리</button>
       <button class="cat-btn" data-cat="single">📦 자취/원룸</button>
       <button class="cat-btn" data-cat="living">🏠 생활/살림</button>
+      <button class="cat-btn" data-cat="electronics">🔌 가전/전자</button>
+      <button class="cat-btn" data-cat="food">☕ 간식/식품</button>
+      <button class="cat-btn" data-cat="interior">🛋️ 가구/인테리어</button>
     </div>
 
   </div>
