@@ -281,14 +281,22 @@
       } catch(e){}
     }
 
-    // Load Products
+    // Load Products (깃허브 정적 배포 캐시 방지 + 실시간 최신 목록 로드)
     async function loadProducts() {
       try {
-        const res = await fetch('/api/products');
+        let res;
+        try {
+          res = await fetch('products.json?t=' + Date.now());
+        } catch (e) {}
+
+        if (!res || !res.ok) {
+          res = await fetch('/api/products');
+        }
+
         allProducts = await res.json();
         renderFiltered();
       } catch (e) {
-        console.error(e);
+        console.error('상품 로딩 실패:', e);
       }
     }
 
