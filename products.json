@@ -1,0 +1,82 @@
+﻿[
+  {
+    "id": "item-1",
+    "name": "공중부양 자석 칫솔살균기 & 치약 디스펜서",
+    "platform": "coupang",
+    "category": "kitchen",
+    "categoryName": "욕실/주방",
+    "price": 12900,
+    "origPrice": 21000,
+    "discount": "38%",
+    "badge": "삶의 질 떡상",
+    "rating": "4.9",
+    "reviews": 1240,
+    "image": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&auto=format&fit=crop",
+    "link": "https://link.coupang.com/",
+    "features": [
+      "물고임과 곰팡이 원천 차단",
+      "자석 거치로 꺼내고 붙이기 0.1초",
+      "무타공 강력 접착 패드 포함"
+    ]
+  },
+  {
+    "id": "item-2",
+    "name": "극세사 틈새 먼지 청소포 & 슬라이딩 핸들",
+    "platform": "coupang",
+    "category": "clean",
+    "categoryName": "청소/정리",
+    "price": 8900,
+    "origPrice": 14000,
+    "discount": "36%",
+    "badge": "자취생 필수",
+    "rating": "4.8",
+    "reviews": 890,
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=600&auto=format&fit=crop",
+    "link": "https://link.coupang.com/",
+    "features": [
+      "소파/침대 밑 3cm 틈새 완벽 침투",
+      "정전기 흡착으로 먼지 날림 0%",
+      "길이 조절 및 헤드 꺾임 지원"
+    ]
+  },
+  {
+    "id": "item-3",
+    "name": "원룸 공간 2배 압축 선반 (무타공 기둥형)",
+    "platform": "naver",
+    "category": "single",
+    "categoryName": "자취/원룸",
+    "price": 18500,
+    "origPrice": 29000,
+    "discount": "36%",
+    "badge": "공간 활용 끝판왕",
+    "rating": "4.9",
+    "reviews": 2100,
+    "image": "https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&auto=format&fit=crop",
+    "link": "https://smartstore.naver.com/",
+    "features": [
+      "벽에 못 박을 필요 없는 압축 고정",
+      "선반 높이 자유자재 조절 가능",
+      "최대 15kg 하중 견디는 강철 프레임"
+    ]
+  },
+  {
+    "id": "item-4",
+    "name": "실리콘 물빼기 싱크대 배수구 매트 & 스퀴지",
+    "platform": "aliexpress",
+    "category": "kitchen",
+    "categoryName": "주방/욕실",
+    "price": 7500,
+    "origPrice": 12000,
+    "discount": "37%",
+    "badge": "물때 방지",
+    "rating": "4.7",
+    "reviews": 650,
+    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?w=600&auto=format&fit=crop",
+    "link": "https://s.click.aliexpress.com/",
+    "features": [
+      "물기가 저절로 싱크대로 흘러내리는 경사 구조",
+      "열탕 소독 가능한 식품용 실리콘",
+      "스폰지 및 비누 받침대 겸용"
+    ]
+  }
+]

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>방구석옵저버의 꿀템 관측소 🔭 | 실생활 꿀템 최저가 모음</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
+    body { background: var(--bg); color: var(--text); padding-bottom: 70px; }
+
+    /* Header Profile */
+    .shop-header {
+      background: linear-gradient(180deg, #ffffff 0%, #fef3c7 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 30px 20px 22px;
+      text-align: center;
+      position: relative;
+    }
+    .profile-avatar {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, #f59e0b, #ec4899);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px; margin: 0 auto 12px;
+      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+      border: 3px solid #fff;
+    }
+    .profile-title { font-size: 21px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
+    .profile-badge {
+      display: inline-block; background: rgba(245, 158, 11, 0.2); color: #b45309;
+      font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 12px; margin-top: 6px;
+    }
+    .profile-bio {
+      font-size: 13px; color: #475569; margin-top: 10px; line-height: 1.5; max-width: 480px; margin-left: auto; margin-right: auto;
+    }
+
+    /* Notice Banner */
+    .notice-bar {
+      background: #0f172a; color: #f8fafc; font-size: 11px; font-weight: 700;
+      padding: 8px 16px; text-align: center; display: flex; justify-content: center; align-items: center; gap: 6px;
+    }
+
+    /* Search & Sticky Bar */
+    .controls-wrapper {
+      position: sticky; top: 0; z-index: 50; background: #fff;
+      border-bottom: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    }
+    .search-box {
+      padding: 12px 16px 8px; max-width: 600px; margin: 0 auto;
+    }
+    .search-input-wrap {
+      display: flex; align-items: center; background: #f1f5f9;
+      border-radius: 10px; padding: 8px 14px; gap: 8px; border: 1px solid transparent;
+    }
+    .search-input-wrap:focus-within { border-color: var(--primary); background: #fff; }
+    .search-input {
+      border: none; background: transparent; outline: none; width: 100%;
+      font-size: 13px; color: #0f172a;
+    }
+
+    /* Platform Tabs (Coupang, Naver, Ali, Toss) */
+    .platform-bar {
+      display: flex; gap: 6px; overflow-x: auto; padding: 6px 16px 8px;
+      scrollbar-width: none; max-width: 600px; margin: 0 auto;
+    }
+    .platform-bar::-webkit-scrollbar { display: none; }
+    .plat-btn {
+      padding: 5px 11px; border-radius: 16px; font-size: 11.5px; font-weight: 700;
+      background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
+    }
+    .plat-btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
+
+    /* Category Bar */
+    .cat-bar {
+      display: flex; gap: 6px; overflow-x: auto; padding: 4px 16px 10px;
+      scrollbar-width: none; max-width: 600px; margin: 0 auto;
+    }
+    .cat-bar::-webkit-scrollbar { display: none; }
+    .cat-btn {
+      padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      background: transparent; color: #64748b; border: none; white-space: nowrap; cursor: pointer;
+    }
+    .cat-btn.active { color: #d97706; font-weight: 900; background: rgba(245, 158, 11, 0.12); }
+
+    /* Product Grid */
+    .product-grid {
+      padding: 16px; display: grid; grid-template-columns: 1fr; gap: 18px;
+      max-width: 600px; margin: 0 auto;
+    }
+    @media (min-width: 520px) {
+      .product-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Card */
+    .card {
+      background: #ffffff; border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border); box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      display: flex; flex-direction: column; transition: transform 0.15s;
+    }
+    .card:hover { transform: translateY(-2px); }
+
+    .card-img-wrap {
+      position: relative; width: 100%; aspect-ratio: 1 / 1;
+      background: #f1f5f9; overflow: hidden;
+    }
+    .card-img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .card-badge {
+      position: absolute; top: 10px; left: 10px;
+      background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(4px);
+      color: #fbbf24; font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px;
+    }
+    .card-plat-badge {
+      position: absolute; top: 10px; right: 10px;
+      font-size: 11px; font-weight: 800; padding: 4px 8px; border-radius: 6px;
+    }
+    .badge-coupang { background: #fee2e2; color: #dc2626; }
+    .badge-naver { background: #dcfce7; color: #16a34a; }
+    .badge-aliexpress { background: #ffedd5; color: #ea580c; }
+    .badge-toss { background: #dbeafe; color: #2563eb; }
+
+    /* 사진 바로 밑 공정위 실시간 고지 스티커 */
+    .card-ad-sticker {
+      background: #f8fafc; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9;
+      padding: 6px 10px; font-size: 10.5px; color: #64748b; line-height: 1.35;
+    }
+    .card-ad-sticker strong { color: #d97706; font-weight: 800; }
+
+    .card-body { padding: 14px; display: flex; flex-direction: column; flex: 1; gap: 8px; }
+    .card-title { font-size: 14px; font-weight: 800; color: #1e293b; line-height: 1.4; }
+    .card-meta { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #64748b; }
+
+    .price-wrap { display: flex; align-items: baseline; gap: 6px; margin-top: auto; padding-top: 4px; }
+    .discount { color: #ef4444; font-size: 16px; font-weight: 900; }
+    .price { font-size: 18px; font-weight: 900; color: #0f172a; }
+    .orig-price { font-size: 12px; color: #94a3b8; text-decoration: line-through; }
+
+    .btn-buy {
+      margin-top: 10px; color: #fff; font-size: 13px; font-weight: 800;
+      text-align: center; padding: 11px; border-radius: 10px; text-decoration: none;
+      display: block; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .btn-buy.btn-coupang { background: linear-gradient(135deg, #f59e0b, #d97706); color: #000; }
+    .btn-buy.btn-naver { background: #10b981; }
+    .btn-buy.btn-aliexpress { background: #f97316; }
+    .btn-buy.btn-toss { background: #3b82f6; }
+    .btn-buy.btn-other { background: #334155; }
+    .btn-buy:active { transform: scale(0.98); }
+
+    /* 🏛️ 공정거래위원회 공식 제휴 고지 박스 (테크 채널과 완벽 동일) */
+    .disclaimer {
+      max-width: 600px; margin: 30px auto 0; padding: 20px 18px;
+      background: #ffffff; border: 1px solid var(--border); border-radius: 14px;
+      font-size: 11px; color: #64748b; line-height: 1.6; text-align: left;
+    }
+    .disclaimer strong { color: #0f172a; font-weight: 800; display: block; margin-bottom: 6px; font-size: 12px; }
+    .disclaimer-sub { margin-top: 8px; font-size: 10.5px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+
+  <!-- Notice Bar -->
+  <div class="notice-bar">
+    <span>🔭</span> 방구석옵저버가 매일 직접 비교해서 찾는 실생활 최저가 꿀템 관측소
+  </div>
+
+  <!-- Header Profile -->
+  <div class="shop-header">
+    <div class="profile-avatar">🔭</div>
+    <div class="profile-title">방구석옵저버의 꿀템 관측소 ✨</div>
+    <div class="profile-badge">공식 큐레이션 마켓</div>
+    <div class="profile-bio">
+      방구석에서 매일 가격·후기 검증된 최저가 꿀템만 관찰합니다.<br>
+      덜 일하고 더 편하게 살기 위한 가성비 살림 & 데스크 꿀템 모음!
+    </div>
+  </div>
+
+  <!-- Controls (Sticky) -->
+  <div class="controls-wrapper">
+    
+    <!-- Search Bar -->
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <span>🔍</span>
+        <input type="text" id="searchInput" class="search-input" placeholder="찾으시는 꿀템을 검색해 보세요 (예: 욕실, 청소, 선반...)">
+      </div>
+    </div>
+
+    <!-- 1단계: 플랫폼별 탭 -->
+    <div class="platform-bar" id="platformBar">
+      <button class="plat-btn active" data-plat="all">🌐 전체 플랫폼</button>
+      <button class="plat-btn" data-plat="coupang">🚀 쿠팡</button>
+      <button class="plat-btn" data-plat="naver">🟢 네이버</button>
+      <button class="plat-btn" data-plat="aliexpress">🟠 알리</button>
+      <button class="plat-btn" data-plat="toss">💙 토스</button>
+    </div>
+
+    <!-- 2단계: 카테고리 탭 -->
+    <div class="cat-bar" id="catBar">
+      <button class="cat-btn active" data-cat="all">전체보기</button>
+      <button class="cat-btn" data-cat="kitchen">🍳 욕실/주방</button>
+      <button class="cat-btn" data-cat="clean">🧹 청소/정리</button>
+      <button class="cat-btn" data-cat="single">📦 자취/원룸</button>
+      <button class="cat-btn" data-cat="living">🏠 생활/살림</button>
+    </div>
+
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid" id="productGrid"></div>
+
+  <!-- 🏛️ 공정거래위원회 정식 법적 고지 (테크 채널과 100% 동일) -->
+  <div class="disclaimer">
+    <strong>🏛️ [제휴·광고 안내 고지]</strong>
+    본 페이지는 쿠팡 파트너스, 네이버 쇼핑 커넥트, 알리익스프레스, 토스쇼핑 등 제휴 마케팅 활동의 일환으로, 구매 링크를 통해 일정액의 수수료를 제공받을 수 있으며 이는 <strong>구매자에게 추가 비용을 전혀 발생시키지 않습니다.</strong><br>
+    <div class="disclaimer-sub">
+      공정거래위원회 '추천·보증 등에 관한 표시·광고 심사지침'을 100% 준수합니다.<br>
+      © 2026 빈둥남의 가성비 살림 연구소. All rights reserved.
+    </div>
+  </div>
+
+  <script>
+    let allProducts = [];
+    let currentCategory = 'all';
+    let currentPlatform = 'all';
+    let searchQuery = '';
+
+    // Visit Analytics Track
+    try {
+      fetch('/api/analytics/visit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source: 'insta' })
+      });
+    } catch(e){}
+
+    // Load Products
+    async function loadProducts() {
+      try {
+        const res = await fetch('/api/products');
+        allProducts = await res.json();
+        renderFiltered();
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    // 🛡️ 플랫폼별 공정위 실시간 법적 문구 반환 함수
+    function getAdNotice(plat) {
+      if (plat === 'coupang') {
+        return '<strong>[광고]</strong> 이 포스팅은 쿠팡 파트너스 활동의 일환으로, 이에 따라 일정액의 수수료를 제공받습니다.';
+      } else if (plat === 'naver') {
+        return '<strong>[광고]</strong> 이 포스팅은 네이버 쇼핑 커넥트 활동의 일환으로, 판매 발생 시 수수료를 제공받습니다.';
+      } else if (plat === 'aliexpress') {
+        return '<strong>[광고]</strong> 이 포스팅에는 알리익스프레스 제휴 링크가 포함되어 있어 일정액의 수수료를 제공받습니다.';
+      } else if (plat === 'toss') {
+        return '<strong>[광고]</strong> 이 콘텐츠는 토스쇼핑 쉐어링크 활동의 일환으로, 구매 발생 시 일정 수수료를 제공받습니다.';
+      }
+      return '<strong>[광고]</strong> 본 링크를 통한 구매 발생 시 일정액의 제휴 수수료를 제공받습니다.';
+    }
+
+    // 플랫폼별 버튼 텍스트 & 클래스
+    function getButtonConfig(plat) {
+      if (plat === 'coupang') return { text: '🚀 쿠팡 로켓배송 최저가 보기 ➔', cls: 'btn-coupang', badge: '🚀 쿠팡', badgeCls: 'badge-coupang' };
+      if (plat === 'naver') return { text: '🟢 네이버 최저가 보러가기 ➔', cls: 'btn-naver', badge: '🟢 네이버', badgeCls: 'badge-naver' };
+      if (plat === 'aliexpress') return { text: '🟠 알리익스프레스 초특가 보기 ➔', cls: 'btn-aliexpress', badge: '🟠 알리', badgeCls: 'badge-aliexpress' };
+      if (plat === 'toss') return { text: '💙 토스쇼핑 특가 혜택 보기 ➔', cls: 'btn-toss', badge: '💙 토스', badgeCls: 'badge-toss' };
+      return { text: '👉 최저가 특가 보러가기 ➔', cls: 'btn-other', badge: '🌐 제휴특가', badgeCls: '' };
+    }
+
+    function renderFiltered() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      let filtered = allProducts;
+      if (currentPlatform !== 'all') {
+        filtered = filtered.filter(p => (p.platform || 'coupang') === currentPlatform);
+      }
+      if (currentCategory !== 'all') {
+        filtered = filtered.filter(p => p.category === currentCategory);
+      }
+      if (searchQuery.trim()) {
+        const q = searchQuery.trim().toLowerCase();
+        filtered = filtered.filter(p => p.name.toLowerCase().includes(q) || (p.features && p.features.some(f => f.toLowerCase().includes(q))));
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div style="text-align:center; padding:50px 20px; color:#64748b; grid-column: 1 / -1;"><div style="font-size:36px; margin-bottom:8px;">🔍</div><div style="font-size:14px; font-weight:700;">조건에 맞는 상품이 없습니다.</div><div style="font-size:12px; margin-top:4px;">다른 검색어나 카테고리를 선택해 보세요!</div></div>';
+        return;
+      }
+
+      filtered.forEach(p => {
+        const plat = p.platform || 'coupang';
+        const btnCfg = getButtonConfig(plat);
+        const adNotice = getAdNotice(plat);
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-img-wrap">
+            <img class="card-img" src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&auto=format&fit=crop'">
+            <div class="card-badge">${p.badge || '삶의 질 떡상'}</div>
+            <div class="card-plat-badge ${btnCfg.badgeCls}">${btnCfg.badge}</div>
+          </div>
+          
+          <!-- 🏷️ 공정위 실시간 제휴 스티커 -->
+          <div class="card-ad-sticker">
+            ${adNotice}
+          </div>
+
+          <div class="card-body">
+            <div class="card-title">${p.name}</div>
+            <div class="card-meta">
+              <span>⭐️ ${p.rating || '4.9'}</span>
+              <span>· 리뷰 ${(p.reviews || 950).toLocaleString()}개</span>
+            </div>
+            <div class="price-wrap">
+              ${p.discount ? `<span class="discount">${p.discount}</span>` : ''}
+              <span class="price">${Number(p.price).toLocaleString()}원</span>
+              ${p.origPrice ? `<span class="orig-price">${Number(p.origPrice).toLocaleString()}원</span>` : ''}
+            </div>
+            <a href="${p.link}" target="_blank" class="btn-buy ${btnCfg.cls}" onclick="trackClick('${p.id}')">
+              ${btnCfg.text}
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function trackClick(productId) {
+      try {
+        fetch('/api/analytics/click', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ productId })
+        });
+      } catch (e) {}
+    }
+
+    // Search Input
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+      searchQuery = e.target.value;
+      renderFiltered();
+    });
+
+    // Platform Tabs
+    document.querySelectorAll('.plat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.plat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentPlatform = btn.dataset.plat;
+        renderFiltered();
+      });
+    });
+
+    // Category Tabs
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCategory = btn.dataset.cat;
+        renderFiltered();
+      });
+    });
+
+    loadProducts();
+  </script>
+</body>
+</html>
