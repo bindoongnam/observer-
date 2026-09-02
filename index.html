@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>방구석옵저버의 꿀템 관측소 🔭 | 실생활 꿀템 최저가 모음</title>
+  <title>방구석 쇼핑 🛍️ | 실생활 꿀템 최저가 모음</title>
   <link rel="preconnect" href="https://cdn.jsdelivr.net">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
   <style>
@@ -27,16 +27,17 @@
       position: relative;
     }
     .profile-avatar {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: linear-gradient(135deg, #f59e0b, #ec4899);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px; margin: 0 auto 12px;
-      box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
-      border: 3px solid #fff;
+      width: 88px; height: 88px; border-radius: 50%;
+      overflow: hidden; margin: 0 auto 12px;
+      box-shadow: 0 8px 24px rgba(59, 130, 246, 0.35);
+      border: 3px solid #3b82f6; background: #fff;
+    }
+    .profile-avatar img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
     }
     .profile-title { font-size: 21px; font-weight: 900; color: #0f172a; letter-spacing: -0.5px; }
     .profile-badge {
-      display: inline-block; background: rgba(245, 158, 11, 0.2); color: #b45309;
+      display: inline-block; background: rgba(59, 130, 246, 0.15); color: #2563eb;
       font-size: 11px; font-weight: 800; padding: 3px 8px; border-radius: 12px; margin-top: 6px;
     }
     .profile-bio {
@@ -67,29 +68,27 @@
       font-size: 13px; color: #0f172a;
     }
 
-    /* Platform Tabs (Coupang, Naver, Ali, Toss) */
+    /* Platform Tabs (2줄 자동 줄바꿈) */
     .platform-bar {
-      display: flex; gap: 6px; overflow-x: auto; padding: 6px 16px 8px;
-      scrollbar-width: none; max-width: 600px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 6px 16px 8px;
+      max-width: 600px; margin: 0 auto;
     }
-    .platform-bar::-webkit-scrollbar { display: none; }
     .plat-btn {
       padding: 5px 11px; border-radius: 16px; font-size: 11.5px; font-weight: 700;
       background: #f1f5f9; color: #64748b; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
     }
     .plat-btn.active { background: #0f172a; color: #fff; border-color: #0f172a; }
 
-    /* Category Bar */
+    /* Category Bar (옆 스크롤 없이 2줄로 완벽 배치) */
     .cat-bar {
-      display: flex; gap: 6px; overflow-x: auto; padding: 4px 16px 10px;
-      scrollbar-width: none; max-width: 600px; margin: 0 auto;
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; padding: 4px 16px 10px;
+      max-width: 600px; margin: 0 auto;
     }
-    .cat-bar::-webkit-scrollbar { display: none; }
     .cat-btn {
-      padding: 5px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
-      background: transparent; color: #64748b; border: none; white-space: nowrap; cursor: pointer;
+      padding: 6px 13px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      background: #f8fafc; color: #64748b; border: 1px solid #e2e8f0; white-space: nowrap; cursor: pointer;
     }
-    .cat-btn.active { color: #d97706; font-weight: 900; background: rgba(245, 158, 11, 0.12); }
+    .cat-btn.active { color: #fff; font-weight: 900; background: #f59e0b; border-color: #f59e0b; }
 
     /* Product Grid */
     .product-grid {
@@ -170,17 +169,19 @@
 
   <!-- Notice Bar -->
   <div class="notice-bar">
-    <span>🔭</span> 방구석옵저버가 매일 직접 비교해서 찾는 실생활 최저가 꿀템 관측소
+    <span>🛍️</span> 방구석 쇼핑이 매일 직접 비교해서 찾는 실생활 최저가 꿀템
   </div>
 
   <!-- Header Profile -->
   <div class="shop-header">
-    <div class="profile-avatar">🔭</div>
-    <div class="profile-title">방구석옵저버의 꿀템 관측소 ✨</div>
+    <div class="profile-avatar">
+      <img src="profile.jpg" alt="방구석 쇼핑" onerror="this.parentElement.innerHTML='🛍️'">
+    </div>
+    <div class="profile-title">방구석 쇼핑 ✨</div>
     <div class="profile-badge">공식 큐레이션 마켓</div>
     <div class="profile-bio">
-      방구석에서 매일 가격·후기 검증된 최저가 꿀템만 관찰합니다.<br>
-      덜 일하고 더 편하게 살기 위한 가성비 살림 & 데스크 꿀템 모음!
+      방구석에서 매일 가격·후기 검증된 최저가 꿀템만 엄선!<br>
+      덜 일하고 더 편하게 살기 위한 가성비 살림 & 데스크 꿀템 모음
     </div>
   </div>
 
