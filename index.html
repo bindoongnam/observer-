@@ -211,9 +211,9 @@
     <div class="cat-bar" id="catBar">
       <button class="cat-btn active" data-cat="all">🔥 전체보기</button>
       <button class="cat-btn" data-cat="kitchen">🍳 욕실/주방</button>
-      <button class="cat-btn" data-cat="clean">🧹 청소/정리</button>
+      <button class="cat-btn" data-cat="clean">🧹 청소/살림</button>
       <button class="cat-btn" data-cat="single">📦 자취/원룸</button>
-      <button class="cat-btn" data-cat="living">🏠 생활/살림</button>
+      <button class="cat-btn" data-cat="beauty">💄 뷰티/케어</button>
       <button class="cat-btn" data-cat="electronics">🔌 가전/전자</button>
       <button class="cat-btn" data-cat="food">☕ 간식/식품</button>
       <button class="cat-btn" data-cat="interior">🛋️ 가구/인테리어</button>
@@ -294,7 +294,11 @@
         filtered = filtered.filter(p => (p.platform || 'coupang') === currentPlatform);
       }
       if (currentCategory !== 'all') {
-        filtered = filtered.filter(p => p.category === currentCategory);
+        if (currentCategory === 'clean') {
+          filtered = filtered.filter(p => p.category === 'clean' || p.category === 'living');
+        } else {
+          filtered = filtered.filter(p => p.category === currentCategory);
+        }
       }
       if (searchQuery.trim()) {
         const q = searchQuery.trim().toLowerCase();
@@ -331,6 +335,20 @@
               <span>⭐️ ${p.rating || '4.9'}</span>
               <span>· 리뷰 ${(p.reviews || 950).toLocaleString()}개</span>
             </div>
+            ${Array.isArray(p.benefits) && p.benefits.length > 0 ? `
+              <div style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:6px;">
+                ${p.benefits.map(b => {
+                  if (b === 'n_delivery') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:#03c75a; color:#fff;">🟢 N배송</span>';
+                  if (b === 'rocket') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:#3b82f6; color:#fff;">🚀 로켓배송</span>';
+                  if (b === 'rocket_jikgu') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:#6366f1; color:#fff;">🚀 로켓직구</span>';
+                  if (b === 'global_jikgu') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:#0d9488; color:#fff;">✈️ 해외직구</span>';
+                  if (b === 'naver_point') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:rgba(3,199,90,0.15); color:#4ade80; border:1px solid rgba(3,199,90,0.3);">🎁 N포인트</span>';
+                  if (b === 'coupang_cash') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:rgba(239,68,68,0.15); color:#fca5a5; border:1px solid rgba(239,68,68,0.3);">💰 쿠팡캐시</span>';
+                  if (b === 'free_shipping') return '<span style="font-size:10px; font-weight:800; padding:2px 6px; border-radius:4px; background:rgba(245,158,11,0.15); color:#fcd34d; border:1px solid rgba(245,158,11,0.3);">📦 무료배송</span>';
+                  return '';
+                }).join('')}
+              </div>
+            ` : ''}
             <div class="price-wrap">
               ${p.discount ? `<span class="discount">${p.discount}</span>` : ''}
               <span class="price">${Number(p.price).toLocaleString()}원</span>
