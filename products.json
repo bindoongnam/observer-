@@ -1,5 +1,21 @@
 [
   {
+    "name": "육개장 사발면 86g",
+    "platform": "coupang",
+    "category": "food",
+    "categoryName": "간식/식품",
+    "price": 10900,
+    "origPrice": 14170,
+    "discount": "23%",
+    "link": "https://link.coupang.com/re/AFFSDP?lptag=AF7798100&pageKey=196473&itemId=18336203256&vendorItemId=85480602424&traceid=V0-143-97a2aa998fae24f5&pt=0&slot=15",
+    "image": "https://img2a.coupangcdn.com/image/retail/images/1002276733156353-6c2430b4-0bfe-4053-8544-d0f5b013ad03.jpg",
+    "badge": "23% 파격 특가 🔥",
+    "benefits": [
+      "rocket"
+    ],
+    "id": "item-1789648051465"
+  },
+  {
     "name": "달구벌 돼지 생막창 세트, 500g, 2봉",
     "platform": "toss",
     "category": "food",
